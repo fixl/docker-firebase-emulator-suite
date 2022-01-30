@@ -1,0 +1,49 @@
+default:
+  image: flemay/musketeers
+  after_script:
+    - make clean
+
+stages:
+  - build
+  - publish
+
+build:
+  stage: build
+  script:
+    - make build
+    - make badges
+    - make scan
+  artifacts:
+    reports:
+      container_scanning: gl-container-scanning-report.json
+  except:
+    - tags
+
+publish:
+  stage: build
+  before_script:
+    - docker login -u gitlab-ci-token -p ${CI_BUILD_TOKEN} ${CI_REGISTRY}
+    - docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}
+  script:
+    - make build
+    - make badges
+    - make scan
+    - make publishGitlab
+    - make publishDockerhub
+  artifacts:
+    paths:
+      - public
+    reports:
+      container_scanning: gl-container-scanning-report.json
+  only:
+    - tags
+
+pages:
+  stage: publish
+  script:
+    - echo "Publishing Badges"
+  artifacts:
+    paths:
+      - public
+  only:
+    - tags

@@ -1,0 +1,14 @@
+version: '2'
+services:
+  firebase:
+    image: firebase-emulator-suite:latest
+    network_mode: host
+    environment:
+      FIREBASE_PROJECT_ID: example
+      HOSTING: 'true'
+      FUNCTIONS: 'true'
+      FIRESTORE: 'true'
+      PUBSUB: 'true'
+      DATABASE: 'true'
+      AUTH: 'true'
+      STORAGE: 'true'

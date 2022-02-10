@@ -61,9 +61,9 @@ build:
 scan: $(EXTRACTED_FILE)
 	if [ ! -f gitlab.tpl ] ; then curl --output gitlab.tpl https://raw.githubusercontent.com/aquasecurity/trivy/master/contrib/gitlab.tpl;  fi
 
-	$(TRIVY_COMMAND) trivy --clear-cache
-	$(TRIVY_COMMAND) trivy --input $(EXTRACTED_FILE) --exit-code 0 --no-progress --format template --template "@gitlab.tpl" -o gl-container-scanning-report.json $(IMAGE_NAME)
-	$(TRIVY_COMMAND) trivy --input $(EXTRACTED_FILE) --exit-code 1 --no-progress --ignore-unfixed --severity CRITICAL $(IMAGE_NAME)
+	$(TRIVY_COMMAND) trivy image --clear-cache
+	$(TRIVY_COMMAND) trivy image --input $(EXTRACTED_FILE) --exit-code 0 --no-progress --format template --template "@gitlab.tpl" -o gl-container-scanning-report.json $(IMAGE_NAME)
+	$(TRIVY_COMMAND) trivy image --input $(EXTRACTED_FILE) --exit-code 1 --no-progress --ignore-unfixed --severity CRITICAL $(IMAGE_NAME)
 
 $(EXTRACTED_FILE):
 	docker save --output $(EXTRACTED_FILE) $(IMAGE_NAME)

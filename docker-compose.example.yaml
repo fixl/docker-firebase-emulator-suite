@@ -3,6 +3,8 @@ services:
   firebase:
     image: registry.gitlab.com/fixl/docker-firebase-emulator-suite:latest
     network_mode: host
+    volumes:
+      - data:/data
     environment:
       FIREBASE_PROJECT_ID: example
       HOSTING: 'true'
@@ -12,3 +14,6 @@ services:
       DATABASE: 'true'
       AUTH: 'true'
       STORAGE: 'true'
+
+volumes:
+  data:

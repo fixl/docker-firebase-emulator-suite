@@ -1,7 +1,7 @@
 version: '2'
 services:
   firebase:
-    image: firebase-emulator-suite:latest
+    image: registry.gitlab.com/fixl/docker-firebase-emulator-suite:latest
     network_mode: host
     environment:
       FIREBASE_PROJECT_ID: example

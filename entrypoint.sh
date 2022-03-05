@@ -84,4 +84,5 @@ fi
 echo ${CONFIG} > firebase.json
 cat firebase.json | jq '.'
 
+echo "firebase --project ${FIREBASE_PROJECT_ID} $@"
 exec firebase --project ${FIREBASE_PROJECT_ID} $@

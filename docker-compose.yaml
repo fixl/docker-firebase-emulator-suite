@@ -4,6 +4,8 @@ services:
     image: aquasec/trivy:latest
     entrypoint: ""
     working_dir: /src
+    environment:
+      TRIVY_TIMEOUT: '30m'
     volumes:
       - cache:/root/.cache/
       - .:/src

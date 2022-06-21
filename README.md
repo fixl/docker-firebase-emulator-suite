@@ -41,9 +41,9 @@ You can enable services by specifying environment variables:
 | `FUNCTIONS`           | If set to `true`, functions emulator will be enabled on port `5001` | N/A                        |
 | `FUNCTIONS_PORT`      | Enabled the functions emulator at the provided port                 | `5001` if `FUNCTIONS=true` |
 | `FIRESTORE`           | If set to `true`, firestore emulator will be enabled on port `8081` | N/A                        |
-| `FIRESTORE_PORT`      | Enabled the firestore emulator at the provided port                 | `5001` if `FIRESTORE=true` |
+| `FIRESTORE_PORT`      | Enabled the firestore emulator at the provided port                 | `8081` if `FIRESTORE=true` |
 | `PUBSUB`              | If set to `true`, pubsub emulator will be enabled on port `8085`    | N/A                        |
-| `PUBSUB_PORT`         | Enabled the pubsub emulator at the provided port                    | `5001` if `PUBSUB=true`    |
+| `PUBSUB_PORT`         | Enabled the pubsub emulator at the provided port                    | `8085` if `PUBSUB=true`    |
 | `DATABASE`            | If set to `true`, database emulator will be enabled on port `9000`  | N/A                        |
 | `DATABASE_PORT`       | Enabled the database emulator at the provided port                  | `9000` if `DATABASE=true`  |
 | `AUTH`                | If set to `true`, auth emulator will be enabled on port `9099`      | N/A                        |

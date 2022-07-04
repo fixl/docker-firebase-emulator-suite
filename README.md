@@ -50,3 +50,19 @@ You can enable services by specifying environment variables:
 | `AUTH_PORT`           | Enabled the auth emulator at the provided port                      | `9099` if `AUTH=true`      |
 | `STORAGE`             | If set to `true`, storage emulator will be enabled on port `9199`   | N/A                        |
 | `STORAGE_PORT`        | Enabled the storage emulator at the provided port                   | `9199` if `STORAGE=true`   |
+
+## Health check
+
+Since the emulators bind to the ethernet interface inside the container, health checks can't run
+against localhost. To work around this, you can determine the IP address in the health check in your
+`docker-compose.yml` like this:
+
+```yaml
+    healthcheck:
+      test: /usr/bin/wget -qO- http://$$(hostname -i):4000
+      timeout: 30s
+      interval: 3s
+      retries: 20
+```
+
+If you run the UI on a non-standard port, you'll have to amend the port accordingly.

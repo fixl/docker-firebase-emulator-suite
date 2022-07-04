@@ -53,13 +53,11 @@ You can enable services by specifying environment variables:
 
 ## Health check
 
-Since the emulators bind to the ethernet interface inside the container, health checks can't run
-against localhost. To work around this, you can determine the IP address in the health check in your
-`docker-compose.yml` like this:
+To add a health check for the emulator container, add something like the following to your `docker-compose.yml`:
 
 ```yaml
     healthcheck:
-      test: /usr/bin/wget -qO- http://$$(hostname -i):4000
+      test: /usr/bin/wget -qO- http://localhost:4000
       timeout: 30s
       interval: 3s
       retries: 20

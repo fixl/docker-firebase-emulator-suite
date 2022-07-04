@@ -18,16 +18,14 @@ if [[ -z "${UI_PORT}" ]] ; then
     echo "Defaulting UI_PORT to ${UI_PORT}"
 fi
 
-IP_ADDRESS=$(hostname -i)
-
 # UI
-CONFIG=$(echo '{}' | jq '.emulators.ui.enabled|=true' | jq ".emulators.ui.host|=\"${IP_ADDRESS}\"" | jq ".emulators.ui.port|="${UI_PORT}"")
+CONFIG=$(echo '{}' | jq '.emulators.ui.enabled|=true' | jq '.emulators.ui.host|="0.0.0.0"' | jq ".emulators.ui.port|="${UI_PORT}"")
 
 function configure_emulator() {
     TYPE=${1}
     PORT=${2}
     CONFIG=${3}
-    echo ${CONFIG} | jq ".emulators.${TYPE}.host|=\"${IP_ADDRESS}\"" | jq ".emulators.${TYPE}.port|=\"${PORT}\""
+    echo ${CONFIG} | jq ".emulators.${TYPE}.host|=\"0.0.0.0\"" | jq ".emulators.${TYPE}.port|=\"${PORT}\""
 }
 
 # Add hosting config

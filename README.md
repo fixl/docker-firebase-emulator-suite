@@ -24,32 +24,35 @@ docker inspect --format='{{ range $k, $v := .Config.Labels }}{{ printf "%s=%s\n"
 ## Usage
 
 ```bash
-docker run --rm -it --net host -e FIRESTORE='true' fixl/firebase-emulator-suite
+docker run --rm -it --net host -e FIRESTORE='true' -e FIRESTORE_RULES_FILE=/src/firestore.rules -v $(pwd)/src -w /src fixl/firebase-emulator-suite
 ```
 
 ## Configuration
 
 You can enable services by specifying environment variables:
 
-| Name                  | Description                                                         | Default                    |
-|:----------------------|:--------------------------------------------------------------------|:---------------------------|
-| `FIREBASE_PROJECT_ID` | The project ID to be used for this emulator                         | `local`                    |
-| `FIREBASE_TOKEN`      | Token used for firebase commands                                    | N/A                        |
-| `UI_PORT`             | The port at which the UI will be exposed                            | `4000`                     |
-| `HOSTING`             | If set to `true`, hosting emulator will be enabled on port `5000`   | N/A                        |
-| `HOSTING_PORT`        | Enabled the hosting emulator at the provided port                   | `5000` if `HOSTING=true`   |
-| `FUNCTIONS`           | If set to `true`, functions emulator will be enabled on port `5001` | N/A                        |
-| `FUNCTIONS_PORT`      | Enabled the functions emulator at the provided port                 | `5001` if `FUNCTIONS=true` |
-| `FIRESTORE`           | If set to `true`, firestore emulator will be enabled on port `8081` | N/A                        |
-| `FIRESTORE_PORT`      | Enabled the firestore emulator at the provided port                 | `8081` if `FIRESTORE=true` |
-| `PUBSUB`              | If set to `true`, pubsub emulator will be enabled on port `8085`    | N/A                        |
-| `PUBSUB_PORT`         | Enabled the pubsub emulator at the provided port                    | `8085` if `PUBSUB=true`    |
-| `DATABASE`            | If set to `true`, database emulator will be enabled on port `9000`  | N/A                        |
-| `DATABASE_PORT`       | Enabled the database emulator at the provided port                  | `9000` if `DATABASE=true`  |
-| `AUTH`                | If set to `true`, auth emulator will be enabled on port `9099`      | N/A                        |
-| `AUTH_PORT`           | Enabled the auth emulator at the provided port                      | `9099` if `AUTH=true`      |
-| `STORAGE`             | If set to `true`, storage emulator will be enabled on port `9199`   | N/A                        |
-| `STORAGE_PORT`        | Enabled the storage emulator at the provided port                   | `9199` if `STORAGE=true`   |
+| Name                   | Description                                                         | Default                    |
+|:-----------------------|:--------------------------------------------------------------------|:---------------------------|
+| `FIREBASE_PROJECT_ID`  | The project ID to be used for this emulator                         | `local`                    |
+| `FIREBASE_TOKEN`       | Token used for firebase commands                                    | N/A                        |
+| `UI_PORT`              | The port at which the UI will be exposed                            | `4000`                     |
+| `HOSTING`              | If set to `true`, hosting emulator will be enabled on port `5000`   | N/A                        |
+| `HOSTING_PORT`         | Enabled the hosting emulator at the provided port                   | `5000` if `HOSTING=true`   |
+| `FUNCTIONS`            | If set to `true`, functions emulator will be enabled on port `5001` | N/A                        |
+| `FUNCTIONS_PORT`       | Enabled the functions emulator at the provided port                 | `5001` if `FUNCTIONS=true` |
+| `FIRESTORE`            | If set to `true`, firestore emulator will be enabled on port `8081` | N/A                        |
+| `FIRESTORE_PORT`       | Enabled the firestore emulator at the provided port                 | `8081` if `FIRESTORE=true` |
+| `FIRESTORE_RULES_FILE` | Specify the firestore rules file to use                             | N/A                        |
+| `PUBSUB`               | If set to `true`, pubsub emulator will be enabled on port `8085`    | N/A                        |
+| `PUBSUB_PORT`          | Enabled the pubsub emulator at the provided port                    | `8085` if `PUBSUB=true`    |
+| `DATABASE`             | If set to `true`, database emulator will be enabled on port `9000`  | N/A                        |
+| `DATABASE_PORT`        | Enabled the database emulator at the provided port                  | `9000` if `DATABASE=true`  |
+| `DATABASE_RULES_FILE`  | Specify the database rules file to use                              | N/A                        |
+| `AUTH`                 | If set to `true`, auth emulator will be enabled on port `9099`      | N/A                        |
+| `AUTH_PORT`            | Enabled the auth emulator at the provided port                      | `9099` if `AUTH=true`      |
+| `STORAGE`              | If set to `true`, storage emulator will be enabled on port `9199`   | N/A                        |
+| `STORAGE_PORT`         | Enabled the storage emulator at the provided port                   | `9199` if `STORAGE=true`   |
+| `STORAGE_RULES_FILE`   | Specify the store rules file to use                                 | `/storage.rules`           |
 
 ## Health check
 

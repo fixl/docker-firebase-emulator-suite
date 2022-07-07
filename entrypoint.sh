@@ -46,6 +46,9 @@ fi
 # Add firestore config
 if [[ "${FIRESTORE}" == "true" || -n "${FIRESTORE_PORT}" ]] ; then
     CONFIG=$(configure_emulator "firestore" "${FIRESTORE_PORT:-8081}" "${CONFIG}")
+    if [[ -f ${FIRESTORE_RULES_FILE} ]] ; then
+        CONFIG=$(echo "${CONFIG}" | jq ".firestore.rules = \"${FIRESTORE_RULES_FILE}\"")
+    fi
 else
     echo "Skipping firestore. Set FIRESTORE to 'true' or FIRESTORE_PORT."
 fi
@@ -60,6 +63,9 @@ fi
 # Add database config
 if [[ "${DATABASE}" == "true" || -n "${DATABASE_PORT}" ]] ; then
     CONFIG=$(configure_emulator "database" "${DATABASE_PORT:-9000}" "${CONFIG}")
+    if [[ -f ${DATABASE_RULES_FILE} ]] ; then
+        CONFIG=$(echo "${CONFIG}" | jq ".database.rules = \"${DATABASE_RULES_FILE}\"")
+    fi
 else
     echo "Skipping database. Set DATABASE to 'true' or DATABASE_PORT."
 fi
@@ -74,7 +80,10 @@ fi
 # Add storage config
 if [[ "${STORAGE}" == "true" || -n ${STORAGE_PORT} ]] ; then
     CONFIG=$(configure_emulator "storage" "${STORAGE_PORT:-9199}" "${CONFIG}")
-    CONFIG=$(echo ${CONFIG} | jq '.storage.rules|="/storage.rules"')
+    STORAGE_RULES=${STORAGE_RULES_FILE:-/storage.rules}
+    if [[ -f ${STORAGE_RULES} ]] ; then
+        CONFIG=$(echo "${CONFIG}" | jq ".storage.rules = \"${STORAGE_RULES}\"")
+    fi
 else
     echo "Skipping storage. Set STORAGE to 'true' or STORAGE_PORT."
 fi

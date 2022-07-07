@@ -35,4 +35,4 @@ ENTRYPOINT ["/entrypoint.sh"]
 VOLUME ["/data"]
 
 # Run emulators by default
-CMD ["--non-interactive", "emulators:start", "--import", "/data", "--export-on-exit"]
+CMD ["--non-interactive", "emulators:start", "--import", "/data/saved-data", "--export-on-exit"]

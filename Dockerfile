@@ -6,7 +6,7 @@ RUN apk add --no-cache \
         make \
         bash \
         jq \
-        openjdk17-jre-headless \
+        openjdk11-jre-headless \
         nodejs \
         npm \
     && npm install -g firebase-tools@${FIREBASE_VERSION} \

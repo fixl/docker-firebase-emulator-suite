@@ -4,3 +4,6 @@ CVE-2021-44906
 
 # vm2
 CVE-2021-23555
+
+# io.netty:netty-codec-http
+CVE-2019-20445

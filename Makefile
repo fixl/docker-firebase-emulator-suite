@@ -68,6 +68,10 @@ scan: $(EXTRACTED_FILE)
 $(EXTRACTED_FILE):
 	docker save --output $(EXTRACTED_FILE) $(IMAGE_NAME)
 
+shell:
+	docker run --platform linux/x86_64 --rm -it --entrypoint "" $(IMAGE_NAME) bash
+.PHONY: shell
+
 badges:
 	mkdir -p public
 	$(ANYBADGE_COMMAND) docker-size $(DOCKERHUB_IMAGE_PATCH) public/size

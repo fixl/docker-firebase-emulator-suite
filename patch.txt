@@ -1,0 +1,7 @@
+        if (System.getenv("FIRESTORE_WEBSOCKET_PORT") != null) {
+            try {
+                websocketPort = Integer.parseInt(System.getenv("FIRESTORE_WEBSOCKET_PORT"));
+            } catch (NumberFormatException ex) {
+                System.out.println("Could not parse websocket port '" + System.getenv("FIRESTORE_WEBSOCKET_PORT") + "'. Using random port: " + websocketPort);
+            }
+        }

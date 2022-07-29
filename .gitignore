@@ -2,3 +2,4 @@ gitlab.tpl
 gl-container-scanning-report.json
 public/
 *.tar
+*.jar

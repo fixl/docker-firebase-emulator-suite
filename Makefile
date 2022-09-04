@@ -13,9 +13,10 @@ CI_PIPELINE_URL ?= local
 TAG = $(FIREBASE_VERSION)
 
 EXTRACTED_FILE = extracted.tar
+DOCKER_BUILDKIT = 1
 
-TRIVY_COMMAND = docker-compose run --rm trivy
-ANYBADGE_COMMAND = docker-compose run --rm anybadge
+TRIVY_COMMAND = docker compose run --rm trivy
+ANYBADGE_COMMAND = docker compose run --rm anybadge
 
 # Computed
 MAJOR = $(shell echo ${FIREBASE_VERSION} | awk -F. '{print $$1}')
@@ -37,6 +38,7 @@ DOCKERHUB_IMAGE_PATCH = $(DOCKERHUB_IMAGE):$(PATCH)
 
 build:
 	docker build \
+		--progress=plain \
 		--pull \
 		--build-arg FIREBASE_VERSION=$(FIREBASE_VERSION) \
 		--label "org.opencontainers.image.title=$(IMAGE_NAME)" \

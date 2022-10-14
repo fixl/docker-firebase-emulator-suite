@@ -16,15 +16,10 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - .:/src
-  firestore:
-    image: registry.gitlab.com/fixl/docker-google-cloud-sdk-emulators:370.0.0-firestore
-    restart: always
-    expose:
-      - 8080
+
   firebase:
     image: firebase-emulator-suite:latest
     working_dir: /src
-    network_mode: host
     environment:
       FIREBASE_PROJECT_ID: foo
 #      HOSTING: 'true'

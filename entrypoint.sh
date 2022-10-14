@@ -49,6 +49,10 @@ if [[ "${FIRESTORE}" == "true" || -n "${FIRESTORE_PORT}" ]] ; then
     if [[ -f ${FIRESTORE_RULES_FILE} ]] ; then
         CONFIG=$(echo "${CONFIG}" | jq ".firestore.rules = \"${FIRESTORE_RULES_FILE}\"")
     fi
+
+    if [[ -n ${FIRESTORE_WEBSOCKET_PORT} ]] ; then
+        CONFIG=$(echo "${CONFIG}" | jq ".emulators.firestore.websocketPort = \"${FIRESTORE_WEBSOCKET_PORT}\"")
+    fi
 else
     echo "Skipping firestore. Set FIRESTORE to 'true' or FIRESTORE_PORT."
 fi

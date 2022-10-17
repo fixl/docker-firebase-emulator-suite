@@ -9,6 +9,7 @@ RUN apt-get update -y  \
         bash \
         jq \
         curl \
+        wget \
     && curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - \
     && apt-get install nodejs \
     && npm install -g firebase-tools@${FIREBASE_VERSION} \

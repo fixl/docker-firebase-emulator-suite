@@ -1,21 +1,23 @@
-FROM alpine:3.16
+FROM openjdk:11-slim-bullseye
 
 ARG FIREBASE_VERSION
 
-RUN apk add --no-cache \
+RUN apt-get update -y && apt-get install -y \
         make \
         bash \
         jq \
-        openjdk11-jre-headless \
-        nodejs \
-        npm \
+        curl \
+    && curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - \
+    && apt-get install nodejs \
     && npm install -g firebase-tools@${FIREBASE_VERSION} \
     && mkdir -p /data \
     && firebase setup:emulators:database \
     && firebase setup:emulators:firestore \
     && firebase setup:emulators:pubsub \
     && firebase setup:emulators:storage \
-    && firebase setup:emulators:ui
+    && firebase setup:emulators:ui \
+    && rm -rf /var/lib/apt/lists/*
+
 
 ENV FIREBASE_PROJECT_ID=
 # Required for some cli operations:  https://firebase.google.com/docs/cli#cli-ci-systems

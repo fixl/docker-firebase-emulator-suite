@@ -1,4 +1,4 @@
-FIREBASE_VERSION = 11.14.3
+FIREBASE_VERSION = 11.14.4
 
 IMAGE_NAME ?= firebase-emulator-suite
 DOCKERHUB_IMAGE ?= fixl/$(IMAGE_NAME)

@@ -3,23 +3,23 @@ FROM openjdk:11-slim-bullseye
 ARG FIREBASE_VERSION
 
 RUN apt-get update -y  \
-    && apt-get dist-upgrade -y \
-    && apt-get install -y \
-        make \
-        bash \
-        jq \
-        curl \
-        wget \
-    && curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - \
-    && apt-get install nodejs \
-    && npm install -g firebase-tools@${FIREBASE_VERSION} \
-    && mkdir -p /data \
-    && firebase setup:emulators:database \
-    && firebase setup:emulators:firestore \
-    && firebase setup:emulators:pubsub \
-    && firebase setup:emulators:storage \
-    && firebase setup:emulators:ui \
-    && rm -rf /var/lib/apt/lists/*
+        && apt-get dist-upgrade -y \
+        && apt-get install -y \
+            make \
+            bash \
+            jq \
+            curl \
+            wget \
+        && curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - \
+        && apt-get install nodejs \
+        && npm install -g firebase-tools@${FIREBASE_VERSION} \
+        && mkdir -p /data \
+        && firebase setup:emulators:database \
+        && firebase setup:emulators:firestore \
+        && firebase setup:emulators:pubsub \
+        && firebase setup:emulators:storage \
+        && firebase setup:emulators:ui \
+        && rm -rf /var/lib/apt/lists/*
 
 
 ENV FIREBASE_PROJECT_ID=

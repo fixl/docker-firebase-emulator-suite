@@ -9,6 +9,8 @@
 A Docker container containing [Firebase CLI](https://github.com/firebase/firebase-tools), with
 pre-installed simulators, and an easy way to manage which emulator you want to use.
 
+> Note: This image supports Apple's M1 chips natively (arm64)
+
 ## Build the image
 
 ```bash

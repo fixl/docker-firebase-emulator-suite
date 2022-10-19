@@ -28,8 +28,7 @@ publish:
     - make build
     - make badges
     - make scan
-    - make publishGitlab
-    - make publishDockerhub
+    - make publish
   artifacts:
     paths:
       - public

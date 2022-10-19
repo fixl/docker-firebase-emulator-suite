@@ -17,6 +17,7 @@ DOCKER_BUILDKIT = 1
 
 TRIVY_COMMAND = docker compose run --rm trivy
 ANYBADGE_COMMAND = docker compose run --rm anybadge
+BINFMT_COMMAND = docker compose run --rm binfmt
 
 # Computed
 MAJOR = $(shell echo ${FIREBASE_VERSION} | awk -F. '{print $$1}')
@@ -36,10 +37,34 @@ DOCKERHUB_IMAGE_PATCH = $(DOCKERHUB_IMAGE):$(PATCH)
 # Export vairables for child processes
 .EXPORT_ALL_VARIABLES:
 
-build:
-	docker build \
+/proc/sys/fs/binfmt_misc/qemu-aarch64:
+	$(BINFMT_COMMAND) --install arm64
+	docker buildx create --use --name firebase
+
+build: /proc/sys/fs/binfmt_misc/qemu-aarch64
+	docker buildx build \
+		--platform linux/amd64 \
 		--progress=plain \
 		--pull \
+		--load \
+		--build-arg FIREBASE_VERSION=$(FIREBASE_VERSION) \
+		--tag $(IMAGE_NAME) \
+		--tag $(GITLAB_IMAGE_LATEST) \
+		--tag $(GITLAB_IMAGE_MAJOR) \
+		--tag $(GITLAB_IMAGE_MINOR) \
+		--tag $(GITLAB_IMAGE_PATCH) \
+		--tag $(DOCKERHUB_IMAGE_LATEST) \
+		--tag $(DOCKERHUB_IMAGE_MAJOR) \
+		--tag $(DOCKERHUB_IMAGE_MINOR) \
+		--tag $(DOCKERHUB_IMAGE_PATCH) \
+		.
+
+publish: /proc/sys/fs/binfmt_misc/qemu-aarch64
+	docker buildx build \
+		--platform linux/amd64,linux/arm64 \
+		--progress=plain \
+		--pull \
+		--push \
 		--build-arg FIREBASE_VERSION=$(FIREBASE_VERSION) \
 		--label "org.opencontainers.image.title=$(IMAGE_NAME)" \
 		--label "org.opencontainers.image.url=https://github.com/firebase/firebase-js-sdk" \
@@ -49,7 +74,6 @@ build:
 		--label "org.opencontainers.image.source=$(CI_PROJECT_URL)" \
 		--label "org.opencontainers.image.revision=$(CI_COMMIT_SHORT_SHA)" \
 		--label "info.fixl.gitlab.pipeline-url=$(CI_PIPELINE_URL)" \
-		--tag $(IMAGE_NAME) \
 		--tag $(GITLAB_IMAGE_LATEST) \
 		--tag $(GITLAB_IMAGE_MAJOR) \
 		--tag $(GITLAB_IMAGE_MINOR) \
@@ -71,25 +95,13 @@ $(EXTRACTED_FILE):
 	docker save --output $(EXTRACTED_FILE) $(IMAGE_NAME)
 
 shell:
-	docker run --platform linux/x86_64 --rm -it --entrypoint "" $(IMAGE_NAME) bash
+	docker run --rm -it --entrypoint "" $(IMAGE_NAME) bash
 .PHONY: shell
 
 badges:
 	mkdir -p public
 	$(ANYBADGE_COMMAND) docker-size $(DOCKERHUB_IMAGE_PATCH) public/size
 	$(ANYBADGE_COMMAND) docker-version $(DOCKERHUB_IMAGE_PATCH) public/version
-
-publishDockerhub:
-	docker push $(DOCKERHUB_IMAGE_LATEST)
-	docker push $(DOCKERHUB_IMAGE_MAJOR)
-	docker push $(DOCKERHUB_IMAGE_MINOR)
-	docker push $(DOCKERHUB_IMAGE_PATCH)
-
-publishGitlab:
-	docker push $(GITLAB_IMAGE_LATEST)
-	docker push $(GITLAB_IMAGE_MAJOR)
-	docker push $(GITLAB_IMAGE_MINOR)
-	docker push $(GITLAB_IMAGE_PATCH)
 
 gitRelease:
 	-git tag -d $(TAG)
@@ -100,6 +112,9 @@ gitRelease:
 
 clean:
 	$(TRIVY_COMMAND) rm -rf gitlab.tpl .cache *.tar
+	-$(BINFMT_COMMAND) --uninstall qemu-aarch64
+	-docker buildx prune --force --all
+	-docker buildx rm firebase
 	-docker rmi $(IMAGE_NAME)
 	-docker rmi $(GITLAB_IMAGE_LATEST)
 	-docker rmi $(GITLAB_IMAGE_MAJOR)

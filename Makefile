@@ -1,4 +1,4 @@
-FIREBASE_VERSION = 11.14.4
+FIREBASE_VERSION = 11.15.0
 
 IMAGE_NAME ?= firebase-emulator-suite
 DOCKERHUB_IMAGE ?= fixl/$(IMAGE_NAME)
@@ -39,7 +39,7 @@ DOCKERHUB_IMAGE_PATCH = $(DOCKERHUB_IMAGE):$(PATCH)
 
 /proc/sys/fs/binfmt_misc/qemu-aarch64:
 	$(BINFMT_COMMAND) --install arm64
-	docker buildx create --use --name firebase
+	-docker buildx create --use --name firebase
 
 build: /proc/sys/fs/binfmt_misc/qemu-aarch64
 	docker buildx build \

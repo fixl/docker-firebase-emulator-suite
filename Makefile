@@ -1,4 +1,5 @@
 FIREBASE_VERSION = 11.28.0
+NODE_VERSION = 16
 
 IMAGE_NAME ?= firebase-emulator-suite
 DOCKERHUB_IMAGE ?= fixl/$(IMAGE_NAME)
@@ -48,6 +49,7 @@ build: /proc/sys/fs/binfmt_misc/qemu-aarch64
 		--pull \
 		--load \
 		--build-arg FIREBASE_VERSION=$(FIREBASE_VERSION) \
+		--build-arg NODE_VERSION=$(NODE_VERSION) \
 		--tag $(IMAGE_NAME) \
 		--tag $(GITLAB_IMAGE_LATEST) \
 		--tag $(GITLAB_IMAGE_MAJOR) \
@@ -66,6 +68,7 @@ publish: /proc/sys/fs/binfmt_misc/qemu-aarch64
 		--pull \
 		--push \
 		--build-arg FIREBASE_VERSION=$(FIREBASE_VERSION) \
+		--build-arg NODE_VERSION=$(NODE_VERSION) \
 		--label "org.opencontainers.image.title=$(IMAGE_NAME)" \
 		--label "org.opencontainers.image.url=https://github.com/firebase/firebase-js-sdk" \
 		--label "org.opencontainers.image.authors=@fixl" \

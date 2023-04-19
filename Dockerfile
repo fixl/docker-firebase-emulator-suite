@@ -1,6 +1,7 @@
 FROM openjdk:11-slim-bullseye
 
 ARG FIREBASE_VERSION
+ARG NODE_VERSION
 
 RUN apt-get update -y  \
         && apt-get dist-upgrade -y \
@@ -10,7 +11,7 @@ RUN apt-get update -y  \
             jq \
             curl \
             wget \
-        && curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - \
+        && curl -fsSL https://deb.nodesource.com/setup_${NODE_VERSION}.x | bash - \
         && apt-get install nodejs \
         && npm install -g firebase-tools@${FIREBASE_VERSION} \
         && mkdir -p /data \

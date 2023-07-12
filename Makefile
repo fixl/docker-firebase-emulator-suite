@@ -1,4 +1,4 @@
-FIREBASE_VERSION = 12.4.3
+FIREBASE_VERSION = 12.4.4
 NODE_VERSION = 20
 
 IMAGE_NAME ?= firebase-emulator-suite

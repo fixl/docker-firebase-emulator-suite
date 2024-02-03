@@ -1,4 +1,4 @@
-FROM openjdk:11-slim-bullseye
+FROM openjdk:23-slim-bookworm
 
 ARG FIREBASE_VERSION
 ARG NODE_VERSION

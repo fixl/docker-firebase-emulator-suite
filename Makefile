@@ -42,7 +42,7 @@ DOCKERHUB_IMAGE_PATCH = $(DOCKERHUB_IMAGE):$(PATCH)
 	$(BINFMT_COMMAND) --install arm64
 	-docker buildx create --use --name firebase
 
-build: /proc/sys/fs/binfmt_misc/qemu-aarch64
+build:
 	docker buildx build \
 		--platform linux/amd64 \
 		--progress=plain \
@@ -63,7 +63,7 @@ build: /proc/sys/fs/binfmt_misc/qemu-aarch64
 
 publish: /proc/sys/fs/binfmt_misc/qemu-aarch64
 	docker buildx build \
-		--platform linux/amd64,linux/arm64 \
+		--platform linux/arm64,linux/amd64\
 		--progress=plain \
 		--pull \
 		--push \

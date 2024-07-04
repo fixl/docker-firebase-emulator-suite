@@ -1,4 +1,4 @@
-FIREBASE_VERSION = 13.12.0
+FIREBASE_VERSION = 13.13.0
 NODE_VERSION = 20
 
 IMAGE_NAME ?= firebase-emulator-suite
@@ -90,7 +90,6 @@ publish: /proc/sys/fs/binfmt_misc/qemu-aarch64
 scan: $(EXTRACTED_FILE)
 	if [ ! -f gitlab.tpl ] ; then curl --output gitlab.tpl https://raw.githubusercontent.com/aquasecurity/trivy/v$(shell docker compose run --rm trivy sh -c "trivy version" | grep Version | head -n1 | awk '{print $$2}')/contrib/gitlab.tpl;  fi
 
-	$(TRIVY_COMMAND) trivy image --clear-cache
 	$(TRIVY_COMMAND) trivy image --input $(EXTRACTED_FILE) --exit-code 0 --no-progress --format template --template "@gitlab.tpl" -o gl-container-scanning-report.json $(IMAGE_NAME)
 	$(TRIVY_COMMAND) trivy image --input $(EXTRACTED_FILE) --exit-code 1 --no-progress --ignore-unfixed --severity CRITICAL $(IMAGE_NAME)
 

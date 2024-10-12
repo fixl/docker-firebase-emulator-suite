@@ -11,3 +11,6 @@ CVE-2023-30547
 
 # io.netty:netty-codec-http
 CVE-2019-20445
+
+# org.apache.avro:avro (cloud-pubsub-emulator-0.8.14-all.jar)
+CVE-2024-47561

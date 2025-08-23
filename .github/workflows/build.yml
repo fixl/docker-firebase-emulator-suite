@@ -1,0 +1,21 @@
+name: Build Container
+on:
+  push:
+#    branches:
+#      - move-to-github
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Build the Docker image
+        run: |
+          make build
+          make badges
+          make scan
+
+#      - name: Login to Docker Hub
+#        uses: docker/login-action@v1
+#        with:
+#          username: ${{ secrets.DOCKER_HUB_USERNAME }}

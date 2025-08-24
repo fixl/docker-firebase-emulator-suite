@@ -1,8 +1,8 @@
 # Firebase Emulator Suite Image
 
-[![pipeline status](https://gitlab.com/fixl/docker-firebase-emulator-suite/badges/master/pipeline.svg)](https://gitlab.com/fixl/docker-firebase-emulator-suite/-/pipelines)
-[![version](https://fixl.gitlab.io/docker-firebase-emulator-suite/version.svg)](https://gitlab.com/fixl/docker-firebase-emulator-suite/-/commits/master)
-[![size](https://fixl.gitlab.io/docker-firebase-emulator-suite/size.svg)](https://gitlab.com/fixl/docker-firebase-emulator-suite/-/commits/master)
+[![Build Container](https://github.com/fixl/docker-firebase-emulator-suite/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/fixl/docker-firebase-emulator-suite/actions/workflows/build.yml)
+[![version](https://fixl.github.io/docker-firebase-emulator-suite/version.svg)](https://github.com/fixl/docker-firebase-emulator-suite/commits/main/)
+[![size](https://fixl.github.io/docker-firebase-emulator-suite/size.svg)](https://github.com/fixl/docker-firebase-emulator-suite/commits/main/)
 [![Docker Pulls](https://img.shields.io/docker/pulls/fixl/firebase-emulator-suite)](https://hub.docker.com/r/fixl/firebase-emulator-suite)
 [![Docker Stars](https://img.shields.io/docker/stars/fixl/firebase-emulator-suite)](https://hub.docker.com/r/fixl/firebase-emulator-suite)
 

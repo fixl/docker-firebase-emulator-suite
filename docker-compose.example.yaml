@@ -1,6 +1,6 @@
 services:
   firebase:
-    image: registry.gitlab.com/fixl/docker-firebase-emulator-suite:latest
+    image: ghcr.io/fixl/docker-firebase-emulator-suite:latest
     ports:
       - 4000:4000
       - 8081:8081

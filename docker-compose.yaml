@@ -9,7 +9,7 @@ services:
       - cache:/root/.cache/
       - .:/src
   anybadge:
-    image: registry.gitlab.com/fixl/docker-anybadge:latest
+    image: ghcr.io/fixl/docker-anybadge:latest
     entrypoint: ""
     working_dir: /src
     volumes:

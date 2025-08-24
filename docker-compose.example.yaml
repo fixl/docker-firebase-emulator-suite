@@ -1,4 +1,3 @@
-version: '2'
 services:
   firebase:
     image: registry.gitlab.com/fixl/docker-firebase-emulator-suite:latest

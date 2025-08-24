@@ -1,4 +1,3 @@
-version: '2'
 services:
   trivy:
     image: aquasec/trivy:latest
@@ -23,6 +22,8 @@ services:
   firebase:
     image: firebase-emulator-suite:latest
     working_dir: /src
+    ports:
+      - 4000:4000
     environment:
       FIREBASE_PROJECT_ID: foo
 #      HOSTING: 'true'

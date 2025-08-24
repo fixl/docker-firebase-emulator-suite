@@ -1,4 +1,4 @@
-FROM openjdk:23-slim-bookworm
+FROM openjdk:26-slim-trixie
 
 ARG FIREBASE_VERSION
 ARG NODE_VERSION

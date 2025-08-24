@@ -1,5 +1,6 @@
 gitlab.tpl
 gl-container-scanning-report.json
+trivy-results.sarif
 public/
 *.tar
 *.jar

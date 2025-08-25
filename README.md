@@ -1,6 +1,6 @@
 # Firebase Emulator Suite Image
 
-[![Build Container](https://github.com/fixl/docker-firebase-emulator-suite/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/fixl/docker-firebase-emulator-suite/actions/workflows/build.yml)
+[![Build Container](https://github.com/fixl/docker-firebase-emulator-suite/actions/workflows/build.yml/badge.svg)](https://github.com/fixl/docker-firebase-emulator-suite/actions/workflows/build.yml)
 [![version](https://fixl.github.io/docker-firebase-emulator-suite/version.svg)](https://github.com/fixl/docker-firebase-emulator-suite/commits/main/)
 [![size](https://fixl.github.io/docker-firebase-emulator-suite/size.svg)](https://github.com/fixl/docker-firebase-emulator-suite/commits/main/)
 [![Docker Pulls](https://img.shields.io/docker/pulls/fixl/firebase-emulator-suite)](https://hub.docker.com/r/fixl/firebase-emulator-suite)
